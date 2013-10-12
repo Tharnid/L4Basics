@@ -1,0 +1,1 @@
+<h2>Hello from Laravel 4</h2>

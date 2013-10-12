@@ -13,5 +13,9 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('home.index');
+});
+
+Route::get('about', function(){
+	return "This is about";
 });
