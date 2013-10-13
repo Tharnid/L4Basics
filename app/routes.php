@@ -13,9 +13,13 @@
 
 Route::get('/', function()
 {
-	return View::make('home.index');
+	$title = "L4 Basics";
+	return View::make('home.index')
+		->with('title', $title);
 });
 
 Route::get('about', function(){
-	return "This is about";
+	$title = "About This";
+	return View::make('home.about')
+		->with('title', $title);
 });
