@@ -23,3 +23,20 @@ Route::get('about', function(){
 	return View::make('home.about')
 		->with('title', $title);
 });
+
+Route::get('users', function(){
+	$title = "My Users";
+	return View::make('home.users')
+		->with('title', $title);
+});
+
+Route::post('users', function(){
+	
+		$input = Input::all();
+
+	DB::insert('insert into test2 (fname, lname) values(?, ?)', array($input['fname'], $input['lname'] ));
+
+	$title = "My Users";
+	return View::make('home.users')
+		->with('title', $title);
+});
