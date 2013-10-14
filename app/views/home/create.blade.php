@@ -18,7 +18,7 @@
 		<div class="span4 well">
 			@if($errors->any())
 				<ul>
-					{{ implode('', $errors->all('<<li class="error">:message</li>')) }}
+					{{ implode('', $errors->all('<<li class="text-error">:message  </li>'))}}
 				</ul>
 			@endif
 		</div>

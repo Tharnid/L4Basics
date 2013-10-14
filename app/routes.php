@@ -27,24 +27,18 @@ Route::get('about', function(){
 		->with('title', $title);
 });
 
-Route::get('users', function(){
-	$title = "My Users";
-	return View::make('home.users')
-		->with('title', $title);
-});
+// Route::get('users', function(){
+// 	$title = "My Users";
+// 	return View::make('home.users')
+// 		->with('title', $title);
+// });
 
-Route::post('users', function(){
+Route::post('/', function(){
 	
 	$input = Input::all();
 
 	// raw query
 	// DB::insert('insert into test2 (fname, lname) values(?, ?)', array($input['fname'], $input['lname'] ));
-
-	// Fluent
-	DB::table('test2')->insert(array(
-		'fname' => $input['fname'],
-		'lname' => $input['lname']
-		));
 
 	$rules = array(
 		'fname' => 'required',
@@ -56,19 +50,38 @@ Route::post('users', function(){
 		'lname.require' => 'A last name is required!!!'
 		);
 
-	$title = "My Users";
-	return View::make('home.users')
-		->with('title', $title);
+	$v = Validator::make($input, $rules, $messages);
+
+	if($v->passes())
+	{
+		// Fluent
+		DB::table('test2')->insert(array(
+			'fname' => $input['fname'],
+			'lname' => $input['lname']
+			));
+
+		return Redirect::to('/');
+	}
+	else
+	{
+		return Redirect::to('create')
+			->withInput()
+			->withErrors($v)
+			->with('message');		
+	}
+	// $title = "My Users";
+	// return View::make('home.index')
+	// 	->with('title', $title);
 });
 
-Route::get('allusers', function() {
-	$user = DB::table('test2')->get();
-	var_dump($user);
+// Route::get('allusers', function() {
+// 	$user = DB::table('test2')->get();
+// 	var_dump($user);
 
-	$title = "All Users";
-	return View::make('home.allusers')
-		->with('title', $title);
-});
+// 	$title = "All Users";
+// 	return View::make('home.allusers')
+// 		->with('title', $title);
+// });
 
 Route::get('create', function() {
 	$title = "Create Users";

@@ -4,8 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{ $title }}</title>
+	{{ HTML::style('css/bootstrap.min.css') }}
 	{{ HTML::style('css/style.css') }}
-	{{ HTML::style('css/bootstrap.css') }}
+
 
 </head>
 
