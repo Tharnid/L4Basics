@@ -6,7 +6,6 @@
 	<title>{{ $title }}</title>
 	{{ HTML::style('css/style.css') }}
 	{{ HTML::style('css/bootstrap.css') }}
-	{{ HTML::style('css/bootstrap.min.css') }}
 
 </head>
 

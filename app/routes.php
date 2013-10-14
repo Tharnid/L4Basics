@@ -13,8 +13,11 @@
 
 Route::get('/', function()
 {
+	
+	$users = DB::table('test2')->get();
+
 	$title = "L4 Basics";
-	return View::make('home.index')
+	return View::make('home.index')->with('users', $users)
 		->with('title', $title);
 });
 
@@ -43,6 +46,16 @@ Route::post('users', function(){
 		'lname' => $input['lname']
 		));
 
+	$rules = array(
+		'fname' => 'required',
+		'lname' => 'required'
+		);
+
+	$messages = array(
+		'fname.require' => 'A first name is required!!!',
+		'lname.require' => 'A last name is required!!!'
+		);
+
 	$title = "My Users";
 	return View::make('home.users')
 		->with('title', $title);
@@ -55,4 +68,10 @@ Route::get('allusers', function() {
 	$title = "All Users";
 	return View::make('home.allusers')
 		->with('title', $title);
+});
+
+Route::get('create', function() {
+	$title = "Create Users";
+	return View::make('home.create')
+		->with('title', $title);	
 });
