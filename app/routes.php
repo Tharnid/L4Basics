@@ -69,22 +69,57 @@ Route::post('/', function(){
 			->withErrors($v)
 			->with('message');		
 	}
-	// $title = "My Users";
-	// return View::make('home.index')
-	// 	->with('title', $title);
 });
 
-// Route::get('allusers', function() {
-// 	$user = DB::table('test2')->get();
-// 	var_dump($user);
-
-// 	$title = "All Users";
-// 	return View::make('home.allusers')
-// 		->with('title', $title);
-// });
 
 Route::get('create', function() {
 	$title = "Create Users";
 	return View::make('home.create')
+		->with('title', $title);	
+});
+
+Route::get('contacts', function() {
+
+	$contacts = Contact::all();
+
+	$title = "Contacts";
+	return View::make('home.contacts')
+		->with('contacts', $contacts)
+		->with('title', $title);
+});
+
+Route::post('contacts', function() {
+
+	$input = Input::all();
+
+	$v = Validator::make($input, Contact::$rules, Contact::$messages);
+
+	if($v->passes())
+	{
+
+		$contact = new Contact;
+		$contact->fname = $input['fname'];
+		$contact->lname = $input['lname'];
+		$contact->state = $input['state'];
+		$contact->region = $input['region'];
+
+		$contact->save();
+
+		return Redirect::to('contacts');
+		
+	}
+	else
+	{
+		return Redirect::to('createContacts')
+			->withInput()
+			->withErrors($v)
+			->with('message');	
+	}
+
+});
+
+Route::get('createContacts', function() {
+	$title = "Create Contacts";
+	return View::make('home.createContacts')
 		->with('title', $title);	
 });
