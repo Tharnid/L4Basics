@@ -142,3 +142,5 @@ Route::get('posts', function(){
 	return View::make('home.posts')
 		->with('title', $title);
 });
+
+// Route::resource('entries', 'EntriesController');
