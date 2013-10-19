@@ -123,3 +123,22 @@ Route::get('createContacts', function() {
 	return View::make('home.createContacts')
 		->with('title', $title);	
 });
+
+Route::get('posts', function(){
+	
+	$post = Post::find(1);
+
+	$comments = Post::find(1)->comment;
+
+	echo '<h2>'.$post->title.'</h2>';
+	echo '<p>'.$post->body.'</p>';
+
+	foreach ($comments as $c)
+	{
+		echo '<li>'.$c->comment.'</li>';
+	}
+
+	$title = "Posts";
+	return View::make('home.posts')
+		->with('title', $title);
+});
